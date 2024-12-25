@@ -9,7 +9,7 @@ const DonorCard = ({ donor }) => {
       <figure>
         <img
           src={donor?.profilePhoto}
-          className="object-cover w-[150px] h-[150px] mx-auto rounded-full"
+          className="object-cover w-[150px] h-[150px] mx-auto rounded-full border-rose-400 border-2"
         />
       </figure>{" "}
       <hr className="my-2" />
