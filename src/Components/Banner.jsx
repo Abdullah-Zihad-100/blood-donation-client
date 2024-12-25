@@ -1,6 +1,10 @@
 import { Link } from "react-router";
 import Container from "./Container";
+import useRole from "../Hooks/useRole"
 const Banner = () => {
+
+  const [role]=useRole();
+
     return (
       <div>
         <Container>
@@ -15,11 +19,23 @@ const Banner = () => {
                   connect voluntary blood donors around Bangladesh.
                 </p>
                 <div className="mt-5 flex gap-5">
-                  <Link to={"/donators-add"} className="bg-red-500 rounded shadow-lg px-4 py-3 text-white font-semibold">
-                    Join as a Donor
-                  </Link>
-                  <Link to={"/donators"} className="bg-white rounded shadow-lg px-4 py-3 text-red-500">
-                   Search Donor
+               {
+                role && role.role==="user" &&
+                
+                    <Link
+                      to={"/donators-add"}
+                      className="bg-red-500 rounded shadow-lg px-4 py-3 text-white font-semibold"
+                    >
+                      Join as a Donor
+                    </Link>
+
+               }
+
+                  <Link
+                    to={"/donators"}
+                    className="bg-white rounded shadow-lg px-4 py-3 text-red-500"
+                  >
+                    Search Donor
                   </Link>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import Button from "../Components/Button";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { GetToken, saveUser } from "../apis/auth";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,11 +16,14 @@ const Login = () => {
   const handleGoogle = async () => {
     try {
       const toastLoading = toast.loading("...Processing");
-      await gooleLogin();
+      const res = await gooleLogin();
+      await GetToken(res?.user?.email);
+      await saveUser(res?.user?.email);
       navigate(from, { replace: true });
       toast.dismiss(toastLoading);
       toast.success("Success Login");
     } catch (err) {
+      toast.dismiss();
       console.log(err);
     }
   };
@@ -33,12 +37,16 @@ const Login = () => {
 
     try {
       const toastLoading = toast.loading("...Processing");
-      await loginUser(email, password);
+      const res = await loginUser(email, password);
+      await GetToken(res?.user?.email);
       toast.dismiss(toastLoading);
       toast.success("Success Login");
       navigate(from, { replace: true });
     } catch (err) {
-      console.log(err);
+      toast.dismiss();
+      toast.error(
+        err.response?.data?.message || "Login failed. Please try again."
+      );
     }
   };
 
@@ -85,7 +93,7 @@ const Login = () => {
                   Please Register
                 </Link>
               </p>
-              <Button>Register</Button>
+              <Button>Login</Button>
             </form>
           </div>
 
@@ -99,7 +107,7 @@ const Login = () => {
               {/* Google Button */}
               <div
                 onClick={handleGoogle}
-                className="bg-rose-500 flex items-center gap-3 p-4 rounded-[45px] cursor-pointer hover:shadow-lg"
+                className="bg-rose-500 flex items-center gap-3 p-3 rounded-[40px] cursor-pointer hover:shadow-lg"
                 title="Register with Google"
               >
                 <div className="p-2 rounded-full border">

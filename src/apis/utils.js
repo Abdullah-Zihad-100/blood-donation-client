@@ -25,3 +25,4 @@ export const imgUplord = async (image) => {
     throw error; // Ensure the caller is aware of the error
   }
 };
+

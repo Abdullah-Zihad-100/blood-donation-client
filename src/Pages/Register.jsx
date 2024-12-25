@@ -5,21 +5,26 @@ import Button from "../Components/Button";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { GetToken, saveUser } from "../apis/auth";
+import { imgUplord } from "../apis/utils";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { createUser, gooleLogin } = useAuth();
+  const { createUser, gooleLogin, updateUserProfile } = useAuth();
   const from = location.state?.from?.pathname || "/";
 
   const handleGoogle = async () => {
     try {
       const toastLoading = toast.loading("...Processing");
-      await gooleLogin();
+      const res = await gooleLogin();
+      await saveUser(res?.user?.email);
+      await GetToken(res?.user?.email);
       toast.dismiss(toastLoading);
       toast.success("Login Successfull");
       navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
+      toast.dismiss();
     }
   };
 
@@ -29,16 +34,25 @@ const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    const userUrl = form.image.files[0];
     console.log("Form submitted", { name, email, password });
 
+    const toastLoading = toast.loading("...Processing");
+    const userPhoto=await imgUplord(userUrl);
+
     try {
-      const toastLoading = toast.loading("...Processing");
-      await createUser(email, password);
+      const res = await createUser(email, password)
+      updateUserProfile(name,userPhoto) 
+      await GetToken(res?.user?.email);
+      await saveUser(res?.user?.email);
       toast.dismiss(toastLoading);
       toast.success("Registation Successfull");
       navigate(from, { replace: true });
     } catch (err) {
+      toast.dismiss()
       console.log(err);
+      toast.error(err.message)
+
     }
   };
 
@@ -85,10 +99,12 @@ const Register = () => {
                   placeholder="Enter a strong password"
                   type="password"
                   name="password"
+
                   required
                   className="w-full h-10 px-2 border-neutral-600 rounded-md border"
                 />
               </label>
+              <input type="file" name="image" id="" />
               <p className="text-neutral-600">
                 Alreday have a account ?{" "}
                 <Link className="text-red-500" to={"/login"}>

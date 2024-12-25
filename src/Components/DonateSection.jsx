@@ -1,68 +1,68 @@
-import { Link } from "react-router";
 import Container from "./Container";
+import Button from "./Button";
+import {Link} from "react-router";
+import Header from "./Header";
 
-const Section = () => {
+const DonateSection = () => {
   return (
     <Container>
+            <Header title={"  Support For Our Website"} />{" "}
       <div className="p-5 py-16">
         <div className="flex flex-col md:flex-row gap-7 items-center">
           {/* Section 1 */}
           <div className="flex-1">
             <h3 className="text-3xl text-neutral-900 leading-8 mb-3">
-              1. What is blood?
+              3. Why Donate to Us?
             </h3>
             <p className="text-[18px] text-neutral-700 leading-10">
-              Blood is a vital fluid in the human body that transports oxygen,
-              nutrients, and waste products. It consists of red blood cells,
-              white blood cells, platelets, and plasma. Blood types are
-              categorized as A, B, AB, and O, with positive or negative Rh
-              factors. The body contains about 5-6 liters of blood, which makes
-              up 7-8% of body weight.
+              Your donations help us improve our platform, expand our reach, and
+              save more lives. With your support, we can provide better
+              services, create new features, and ensure the availability of
+              essential resources for blood donation campaigns.
             </p>
           </div>
 
           {/* Section 2 */}
           <div className="flex-1">
             <h3 className="text-3xl text-neutral-900 leading-10 mb-3">
-              2. Why Should Users Use Our Website?
+              How Your Contribution Makes a Difference
             </h3>
             <div className="space-y-7 text-neutral-700">
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Find Donors Easily:
+                  Better Technology:
                 </span>{" "}
-                Locate blood donors in your area within minutes.
+                Help us build a faster, more reliable platform.
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Reliable Information:
+                  Increased Awareness:
                 </span>{" "}
-                Access verified donor profiles and health status.
+                Support campaigns to educate people about blood donation.
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Community Support:
+                  Broader Reach:
                 </span>{" "}
-                Join a community committed to saving lives.
+                Enable us to connect with more donors and recipients globally.
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Educational Resources:
+                  Community Growth:
                 </span>{" "}
-                Learn about blood types, donation processes, and safety
-                precautions.
+                Join hands in growing a life-saving community.
               </p>
             </div>
           </div>
         </div>
-        <div className="flex justify-center items-center mt-10">
-          <Link to={"/about"} className="bg-red-500 rounded shadow-lg px-4 py-3 text-white font-semibold">
-           Learn More
-          </Link>
-        </div>
+        <Link to={"/payment"} className="flex justify-center items-center mt-10">
+          <Button className="bg-blue-500 rounded shadow-lg px-4 py-3 text-white font-semibold">
+            Donate
+          </Button>
+        </Link>
       </div>
     </Container>
   );
 };
 
-export default Section;
+export default DonateSection;

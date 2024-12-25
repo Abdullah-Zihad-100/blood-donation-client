@@ -1,22 +1,25 @@
-import { IoIosCamera } from "react-icons/io";
+import { useEffect, useState } from "react";
+import useAuth from "../Hooks/useAuth";
+import axiosSeceure from "../apis";
+import Loader from "../Components/Loader";
 import Button from "../Components/Button";
-import Container from "../Components/Container";
+import { IoIosCamera } from "react-icons/io";
 import Header from "../Components/Header";
-import { useState } from "react";
-import { addDonor } from "../apis/donors";
-import { imgUplord } from "../apis/utils.js";
+import Container from "../Components/Container";
 import toast from "react-hot-toast";
-import useAuth from "../Hooks/useAuth.jsx";
-import { saveAsADonator } from "../apis/auth.js";
-import { useNavigate } from "react-router";
-const DonatorsAdd = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+import { imgUplord } from "../apis/utils";
+import { editProfile } from "../apis/auth.js";
+import {useNavigate} from "react-router"
+const EditDonator = () => {
+  const navigete=useNavigate();
   const [selectedImage, setSelectedImage] = useState(
     "https://www.exscribe.com/wp-content/uploads/2021/08/placeholder-image-person-jpg.jpg"
   );
 
-  //   image preview change
+  const [donor, setDonor] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
+
   const handleFileChange = (e) => {
     const file = e.target?.files[0];
     if (file) {
@@ -27,6 +30,24 @@ const DonatorsAdd = () => {
       reader.readAsDataURL(file);
     }
   };
+  useEffect(() => {
+    const fetchDonors = async () => {
+      try {
+        setLoading(true); // Start loading
+        const res = await axiosSeceure.get(
+          `/profile-donors?email=${user?.email}`
+        );
+        setDonor(res.data.donor);
+      } catch (error) {
+        console.error("Error fetching donors:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchDonors();
+  }, [user?.email]);
+  console.log(donor);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -78,22 +99,18 @@ const DonatorsAdd = () => {
           bloodBankAffiliation,
         };
         console.log(donorData);
-        await addDonor(donorData);
-        const res = await saveAsADonator(user?.email);
-        console.log(res);
-        navigate("/my-profile");
-        window.location.reload();
+       const res= await editProfile(donor?._id, donorData);
+       console.log(res);
         toast.dismiss(loading);
         toast.success("Successfully Donor Added");
+        navigete("/my-profile")
       } else {
-        toast.dismiss();
         return toast.error("Image not uploard");
       }
     } catch (err) {
       toast.dismiss();
       console.log(err);
-      toast.error(err.message);
-      toast.error("upload a image");
+      toast.error(err.message, "Uplord a image");
     }
 
     // try {
@@ -103,18 +120,29 @@ const DonatorsAdd = () => {
     // }
   };
 
+  if (loading) {
+    <Loader />;
+  }
+
   return (
     <Container>
       <div className="p-5">
         <form
           onSubmit={handleFormSubmit}
           className="flex flex-col gap-y-4 mx-auto justify-center"
+          noValidate
         >
-          <Header title={"Register as a Donors"}></Header>
+          <Header title={"Edit Profile"}></Header>
 
           {/* image set for donor */}
+<i className="text-lg text-rose-500">** Please reuplord your profile photo **</i>
 
           <div className="mx-auto relative w-[80px] h-[80px]">
+
+            {/* notes */}
+
+
+
             {/* File Input with Label */}
             <label className="absolute bottom-0 right-0 cursor-pointer">
               {/* Hidden File Input */}
@@ -141,6 +169,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">First Name</p>
               <input
+                defaultValue={donor?.firstName}
                 placeholder="Enter first name"
                 type="text"
                 required
@@ -151,6 +180,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Last Name</p>
               <input
+                defaultValue={donor?.lastName}
                 placeholder="Enter last name"
                 type="text"
                 required
@@ -163,6 +193,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Date Of Birth</p>
               <input
+                defaultValue={donor?.dateOfBirth}
                 placeholder="Enter your name"
                 type="date"
                 required
@@ -173,6 +204,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Current Location</p>
               <input
+                defaultValue={donor?.currentLocation}
                 placeholder="Enter your current location"
                 type="text"
                 required
@@ -186,6 +218,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Permanent Location</p>
               <input
+                defaultValue={donor?.permanentLocation}
                 placeholder="Enter your permanent location"
                 type="text"
                 required
@@ -195,45 +228,36 @@ const DonatorsAdd = () => {
             </label>
             <label className="w-full">
               <p className="text-lg font-semibold">Blood Group</p>
-              <select
-                name="bloodGroup"
+              <input
+                defaultValue={donor?.bloodGroup}
+                placeholder="Enter your blood group"
+                type="text"
                 required
+                name="bloodGroup"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
-              >
-                <option value={""}>Select One</option>
-                <option value={"A+"}>A+</option>
-                <option value={"A-"}>A-</option>
-                <option value={"B+"}>B+</option>
-                <option value={"B-"}>B-</option>
-                <option value={"O+"}>O+</option>
-                <option value={"O-"}>O-</option>
-                <option value={"AB+"}>AB+</option>
-                <option value={"AB-"}>AB-</option>
-              </select>
+              />
             </label>
           </div>
 
           <div className="flex items-center gap-5 justify-center">
             <label className="w-full">
-              <p className="text-lg font-semibold">
-                Last Blood Donate Time{" "}
-                <span className="text-sm text-gray-600">(optional)</span>
-              </p>
+              <p className="text-lg font-semibold">Last Blood Donate Time</p>
               <input
+                defaultValue={donor?.lastBloodDonateTime}
                 type="date"
+                required
                 name="lastBloodDonateTime"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
               />
             </label>
 
             <label className="w-full">
-              <p className="text-lg font-semibold">
-                Facebook Url
-                <span className="text-sm text-gray-600">(optional)</span>
-              </p>
+              <p className="text-lg font-semibold">Facebook Url</p>
               <input
+                defaultValue={donor?.facebookUrl}
                 placeholder="Enter your Facebook Url"
                 type="text"
+                required
                 name="facebookUrl"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
               />
@@ -242,25 +266,23 @@ const DonatorsAdd = () => {
 
           <div className="flex items-center gap-5 justify-center">
             <label className="w-full">
-              <p className="text-lg font-semibold">
-                Whatsapp Url{" "}
-                <span className="text-sm text-gray-600">(optional)</span>
-              </p>
+              <p className="text-lg font-semibold">Whatsapp Url</p>
               <input
+                defaultValue={donor?.whatsappUrl}
                 placeholder="Enter your Whatsapp Url"
                 type="text"
+                required
                 name="whatsappUrl"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
               />
             </label>
             <label className="w-full">
-              <p className="text-lg font-semibold">
-                Contact Number{" "}
-                <span className="text-sm text-gray-600">(optional)</span>
-              </p>
+              <p className="text-lg font-semibold">Contact Number</p>
               <input
+                defaultValue={donor?.contactNumber}
                 placeholder="Enter your contact number"
                 type="number"
+                required
                 name="contactNumber"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
               />
@@ -269,25 +291,23 @@ const DonatorsAdd = () => {
 
           <div className="flex items-center gap-5 justify-center">
             <label className="w-full">
-              <p className="text-lg font-semibold">
-                Blood Bank Affiliation{" "}
-                <span className="text-sm text-gray-600">(optional)</span>
-              </p>
+              <p className="text-lg font-semibold">Blood Bank Affiliation</p>
               <input
+                defaultValue={donor?.bloodBankAffiliation}
                 placeholder="Enter your Blood Bank Affiliation"
                 type="text"
+                required
                 name="bloodBankAffiliation"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
               />
             </label>
             <label className="w-full">
-              <p className="text-lg font-semibold">
-                Last Health Checkup{" "}
-                <span className="text-sm text-gray-600">(optional)</span>
-              </p>
+              <p className="text-lg font-semibold">Last Health Checkup</p>
               <input
+                defaultValue={donor?.lastHealthCheckup}
                 placeholder="Enter your Blood Bank Affiliation"
                 type="date"
+                required
                 name="lastHealthCheckup"
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
               />
@@ -298,6 +318,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Gender</p>
               <select
+                defaultValue={donor?.gender}
                 name="gender"
                 required
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
@@ -310,6 +331,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Availability</p>
               <select
+                defaultValue={donor?.availability}
                 name="availability"
                 required
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
@@ -324,6 +346,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">How Many Times Donate</p>
               <input
+                defaultValue={donor?.howManyTimesDonate}
                 placeholder="Enter how many time you donate"
                 type="number"
                 required
@@ -334,6 +357,7 @@ const DonatorsAdd = () => {
             <label className="w-full">
               <p className="text-lg font-semibold">Emergency Availability</p>
               <select
+                defaultValue={donor?.emergencyAvailability}
                 name="emergencyAvailability"
                 required
                 className="w-full h-10 px-2 border-neutral-600 rounded-md border"
@@ -345,11 +369,9 @@ const DonatorsAdd = () => {
           </div>
 
           <label className="w-full">
-            <p className="text-lg font-semibold">
-              Donation Motivation{" "}
-              <span className="text-sm text-gray-600">(optional)</span>
-            </p>
+            <p className="text-lg font-semibold">Donation Motivation</p>
             <textarea
+              defaultValue={donor?.donationMotivation}
               name="donationMotivation"
               placeholder="Why do you donate blood?"
               className="w-full h-20 px-2 border-neutral-600 rounded-md border"
@@ -363,18 +385,4 @@ const DonatorsAdd = () => {
     </Container>
   );
 };
-export default DonatorsAdd;
-
-// emargencuy
-
-//   <label className="w-full">
-//     <p className="text-lg font-semibold">Emergency Availability</p>
-//     <select
-//       name="emergencyAvailability"
-//       required
-//       className="w-full h-10 px-2 border-neutral-600 rounded-md border"
-//     >
-//       <option value="true">Yes</option>
-//       <option value="false">No</option>
-//     </select>
-//   </label>;
+export default EditDonator;
