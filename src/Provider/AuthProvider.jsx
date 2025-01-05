@@ -7,6 +7,7 @@ import {
   updateProfile,
   signInWithPopup,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import {auth} from "../Firebase/firebase.config.js"
 export const AuthContaxt = createContext(null);
@@ -54,6 +55,14 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  // forget password
+
+  const forgetPass=(email)=>{
+    setLoading(false);
+     return sendPasswordResetEmail(auth,email)
+  }
+
+
     const updateUserProfile = (name, image) => {
       return updateProfile(auth.currentUser, {
         displayName: name,
@@ -69,6 +78,7 @@ const AuthProvider = ({ children }) => {
     gooleLogin,
     logout,
     updateUserProfile,
+    forgetPass,
   };
 
   return (

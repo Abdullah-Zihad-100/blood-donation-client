@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { IoLogoWhatsapp } from "react-icons/io";
 import { RiFacebookCircleFill } from "react-icons/ri";
+
 import Button from "./Button";
 import useRole from "../Hooks/useRole";
 import useAuth from "../Hooks/useAuth";
@@ -28,12 +29,14 @@ const DetailsSec = ({ donor }) => {
     const hospitalName = from.hospitalName.value;
     const contactNumber = from.contactNumber.value;
     const currentLocation = from.currentLocation.value;
+    const dateTime = from.dateTime.value;
     const details = {
       patientName,
       hospitalName,
       currentLocation,
       contactNumber,
       email,
+      dateTime,
     };
     toast.success("Requste Send Successfull");
     console.log(details);
@@ -184,7 +187,7 @@ const DetailsSec = ({ donor }) => {
                     <label className="w-full">
                       <p className="text-lg font-semibold">Contact Number</p>
                       <input
-                        placeholder="ontact number"
+                        placeholder="contact number"
                         type="number"
                         required
                         name="contactNumber"
@@ -214,6 +217,17 @@ const DetailsSec = ({ donor }) => {
                       />
                     </label>
                   </div>
+
+                  <label className="w-5/6 m-auto">
+                    <p className="text-lg font-semibold">Date Time Details</p>
+                    <input
+                      placeholder="enter date and time details"
+                      type="text"
+                      required
+                      name="dateTime"
+                      className="w-full h-10 px-2 border-neutral-600 rounded-md border"
+                    />
+                  </label>
 
                   <div className="modal-action justify-center mt-6">
                     <button

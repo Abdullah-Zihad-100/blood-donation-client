@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "../Components/Header";
 import DonorCard from "../Components/Cards/DonorCard";
 import axiosSeceure from "../apis";
@@ -7,6 +8,7 @@ import Container from "../Components/Container";
 import Banner from "../Components/Banner";
 
 const Donators = () => {
+  const { t } = useTranslation(); // Translation hook
   const [donors, setDonors] = useState([]);
   const [filteredDonors, setFilteredDonors] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,21 +16,19 @@ const Donators = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        setLoading(true); // Start loading
+        setLoading(true);
         const res = await axiosSeceure.get("/donors");
         setDonors(res.data);
         setFilteredDonors(res.data);
       } catch (error) {
         console.error("Error fetching donors:", error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
     fetchDonors();
   }, []);
-
-  console.log(donors);
 
   const handleSort = (value) => {
     if (value) {
@@ -39,18 +39,16 @@ const Donators = () => {
     }
   };
 
-  // Show the loader while loading
   if (loading) return <Loader />;
 
-  // Render donor list
   return (
     <Container>
       <Banner />
       <div>
-        <Header title={"Here is our donators"} />
+        <Header title={t("donators.title")} />
         <div className="flex justify-end items-center gap-2">
           <p className="text-lg font-semibold text-gray-600">
-            Sort by blood group
+            {t("donators.sortBy")}
           </p>
           <select
             onChange={(e) => handleSort(e.target.value)}
@@ -58,17 +56,18 @@ const Donators = () => {
             required
             className="h-10 px-2 bg-rose-400 rounded-md text-white outline-none"
           >
-            <option value={""}>Select One</option>
-            <option value={"A+"}>A+</option>
-            <option value={"A-"}>A-</option>
-            <option value={"B+"}>B+</option>
-            <option value={"B-"}>B-</option>
-            <option value={"O+"}>O+</option>
-            <option value={"O-"}>O-</option>
-            <option value={"AB+"}>AB+</option>
-            <option value={"AB-"}>AB-</option>
+            <option value="">{t("donators.selectOne")}</option>
+            <option value="A+">{t("donators.bloodGroups.A+")}</option>
+            <option value="A-">{t("donators.bloodGroups.A-")}</option>
+            <option value="B+">{t("donators.bloodGroups.B+")}</option>
+            <option value="B-">{t("donators.bloodGroups.B-")}</option>
+            <option value="O+">{t("donators.bloodGroups.O+")}</option>
+            <option value="O-">{t("donators.bloodGroups.O-")}</option>
+            <option value="AB+">{t("donators.bloodGroups.AB+")}</option>
+            <option value="AB-">{t("donators.bloodGroups.AB-")}</option>
           </select>
-        </div> <hr className="mt-5" />
+        </div>
+        <hr className="mt-5" />
         <div className="my-10">
           {filteredDonors?.length > 0 ? (
             <div
@@ -80,7 +79,9 @@ const Donators = () => {
               ))}
             </div>
           ) : (
-            <p className="text-xl text-center my-56">No Donors Added</p>
+            <p className="text-xl text-center my-56">
+              {t("donators.noDonorsMessage")}
+            </p>
           )}
         </div>
       </div>

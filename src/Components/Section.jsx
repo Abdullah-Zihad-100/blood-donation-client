@@ -1,7 +1,10 @@
 import { Link } from "react-router";
 import Container from "./Container";
+import { useTranslation } from "react-i18next";
 
 const Section = () => {
+  const { t } = useTranslation(); // useTranslation hook for i18n
+
   return (
     <Container>
       <div className="p-5 py-16">
@@ -9,55 +12,54 @@ const Section = () => {
           {/* Section 1 */}
           <div className="flex-1">
             <h3 className="text-3xl text-neutral-900 leading-8 mb-3">
-              1. What is blood?
+              {t("section.section1.title")}
             </h3>
             <p className="text-[18px] text-neutral-700 leading-10">
-              Blood is a vital fluid in the human body that transports oxygen,
-              nutrients, and waste products. It consists of red blood cells,
-              white blood cells, platelets, and plasma. Blood types are
-              categorized as A, B, AB, and O, with positive or negative Rh
-              factors. The body contains about 5-6 liters of blood, which makes
-              up 7-8% of body weight.
+              {t("section.section1.description")}
             </p>
           </div>
 
           {/* Section 2 */}
           <div className="flex-1">
             <h3 className="text-3xl text-neutral-900 leading-10 mb-3">
-              2. Why Should Users Use Our Website?
+              {t("section.section2.title")}
             </h3>
             <div className="space-y-7 text-neutral-700">
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Find Donors Easily:
+                  {t("section.section2.features.findDonors.title")}
                 </span>{" "}
-                Locate blood donors in your area within minutes.
+                {t("section.section2.features.findDonors.description")}
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Reliable Information:
+                  {t("section.section2.features.reliableInfo.title")}
                 </span>{" "}
-                Access verified donor profiles and health status.
+                {t("section.section2.features.reliableInfo.description")}
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Community Support:
+                  {t("section.section2.features.communitySupport.title")}
                 </span>{" "}
-                Join a community committed to saving lives.
+                {t("section.section2.features.communitySupport.description")}
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Educational Resources:
+                  {t("section.section2.features.educationalResources.title")}
                 </span>{" "}
-                Learn about blood types, donation processes, and safety
-                precautions.
+                {t(
+                  "section.section2.features.educationalResources.description"
+                )}
               </p>
             </div>
           </div>
         </div>
         <div className="flex justify-center items-center mt-10">
-          <Link to={"/about"} className="bg-red-500 rounded shadow-lg px-4 py-3 text-white font-semibold">
-           Learn More
+          <Link
+            to="/about"
+            className="bg-red-500 rounded shadow-lg px-4 py-3 text-white font-semibold"
+          >
+            {t("section.button.learnMore")}
           </Link>
         </div>
       </div>

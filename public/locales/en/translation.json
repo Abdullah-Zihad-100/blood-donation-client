@@ -1,0 +1,229 @@
+{
+ "header": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "donators": "Donators",
+    "reviews": "Reviews",
+        "login": "Login"
+
+  },
+  "userProfile": {
+    "userName": "User Name",
+    "myProfile": "My Profile",
+    "logout": "Logout",
+    "dashboard": "Dashboard"
+  }
+  ,
+  "section": {
+    "section1": {
+      "title": "1. What is blood?",
+      "description": "Blood is a vital fluid in the human body that transports oxygen, nutrients, and waste products. It consists of red blood cells, white blood cells, platelets, and plasma. Blood types are categorized as A, B, AB, and O, with positive or negative Rh factors. The body contains about 5-6 liters of blood, which makes up 7-8% of body weight."
+    },
+    "section2": {
+      "title": "2. Why Should Users Use Our Website?",
+      "features": {
+        "findDonors": {
+          "title": "Find Donors Easily:",
+          "description": "Locate blood donors in your area within minutes."
+        },
+        "reliableInfo": {
+          "title": "Reliable Information:",
+          "description": "Access verified donor profiles and health status."
+        },
+        "communitySupport": {
+          "title": "Community Support:",
+          "description": "Join a community committed to saving lives."
+        },
+        "educationalResources": {
+          "title": "Educational Resources:",
+          "description": "Learn about blood types, donation processes, and safety precautions."
+        }
+      }
+    },
+    "button": {
+      "learnMore": "Learn More"
+    }
+},
+"banner": {
+   "title": "Social media platform to connect blood searchers with donors",
+   "description": "It is a real-time free platform to help blood searchers connect voluntary blood donors around Bangladesh.",
+   "joinAsDonor": "Join as a Donor",
+   "searchDonor": "Search Donor"
+ },
+ 
+  "network": {
+    "title": "We're a network of",
+    "loading": "Loading...",
+    "donors": "Donors",
+    "districts": "64 Districts",
+    "groups": "3 Groups"
+  },
+   "donateSection": {
+    "header": "Support For Our Website",
+    "section1Title": "3. Why Donate to Us?",
+    "section1Description": "Your donations help us improve our platform, expand our reach, and save more lives. With your support, we can provide better services, create new features, and ensure the availability of essential resources for blood donation campaigns.",
+    "section2Title": "How Your Contribution Makes a Difference",
+    "techTitle": "Better Technology:",
+    "techDescription": "Help us build a faster, more reliable platform.",
+    "awarenessTitle": "Increased Awareness:",
+    "awarenessDescription": "Support campaigns to educate people about blood donation.",
+    "reachTitle": "Broader Reach:",
+    "reachDescription": "Enable us to connect with more donors and recipients globally.",
+    "communityTitle": "Community Growth:",
+    "communityDescription": "Join hands in growing a life-saving community.",
+    "donateButton": "Donate"
+  },
+   "footer": {
+    "title": "Compact Blood Donation",
+    "description": "This website is an automated blood service that connects blood searchers with voluntary blood donors in a moment through SMS and website.",
+    "terms": "Terms & Conditions | Privacy Policy",
+    "linksTitle": "Our Links",
+    "links": {
+      "home": "Home",
+      "about": "About Us",
+      "donators": "Donators",
+      "contact": "Contact Us",
+      "reviews": "Reviews"
+    },
+    "aboutBloodTitle": "About Blood",
+    "aboutBlood": {
+      "whatIsBlood": "What is blood",
+      "whatIsDonation": "What is blood donation",
+      "whoCanDonate": "Who can donate blood",
+      "bloodGroups": "Different blood groups"
+    },
+    "copyright": "Copyright © CPI {{year}} - Present | Made with ❤ by {{creator}}"
+  },
+  
+"userReview":{
+"header":"User Reviews"
+} 
+
+,
+  "headers": {
+    "title": "About Us",
+    "subtitle": "Understanding the importance of blood donation"
+  },
+  "sections": {
+    "aboutUs": {
+      "title": "About Us",
+      "content": [
+        "Welcome to our blood donation platform, created as part of our college project. This initiative aims to bridge the gap between blood donors and those in need, providing a reliable and efficient way to save lives.",
+        "Our website allows users to search for donors based on blood groups, access donor contact details, and connect with them directly for assistance. This platform empowers communities to help each other in times of medical emergencies by making blood donation faster and more accessible.",
+        "Through this project, we also aim to raise awareness about the critical need for blood donation and encourage individuals to contribute to saving lives. Together, we can make a difference!"
+      ]
+    },
+    "whatIsBlood": {
+      "title": "What is Blood?",
+      "content": [
+        "Blood is a vital fluid in the human body that carries oxygen, nutrients, and hormones to tissues and organs while removing waste products. It consists of red blood cells, white blood cells, platelets, and plasma. Blood is essential for maintaining life and overall health."
+      ]
+    },
+    "whatIsBloodDonation": {
+      "title": "What is Blood Donation?",
+      "content": [
+        "Blood donation is the process of voluntarily giving blood to help others in need. Donated blood is used in life-saving procedures, surgeries, and to treat patients with conditions like anemia or cancer. A single blood donation can save up to three lives."
+      ]
+    },
+    "whoCanDonateBlood": {
+      "title": "Who Can Donate Blood?",
+      "content": [
+        "Individuals aged 18 to 65 years old.",
+        "Weighing at least 50 kg (110 lbs).",
+        "In good general health and feeling well on the day of donation.",
+        "Free of infections or medical conditions that could harm the recipient.",
+        "Meeting specific guidelines set by health authorities."
+      ]
+    },
+    "bloodGroups": {
+      "title": "Different Blood Groups",
+      "table": {
+        "headers": ["Blood Group", "Can Donate To", "Can Receive From"],
+        "rows": [
+          ["A+", "A+, AB+", "A+, A-, O+, O-"],
+          ["B+", "B+, AB+", "B+, B-, O+, O-"],
+          ["O+", "O+, A+, B+, AB+", "O+, O-"],
+          ["AB+", "AB+", "A+, B+, AB+, O+, A-, B-, AB-, O-"],
+          ["O-", "All blood groups", "O-"]
+        ]
+      }
+    }
+}
+,
+ "contact": {
+    "title": "Contact With Us",
+    "location": "Feni sodor, academy road, Compact polytechnic institute",
+    "sms": "01XXXXXXXX (Only SMS)",
+    "email": "cpiblooddonation@gmail.com",
+    "onlineContactTitle": "Contact Us Online",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "contactNumber": "Contact Number",
+      "contactNumberPlaceholder": "Enter your contact number",
+      "sendMessage": "Send Message"
+    },
+    "toastMessage": "Send Email Successful"
+  },
+   "donators": {
+    "title": "Here is our donators",
+    "sortBy": "Sort by blood group",
+    "selectOne": "Select One",
+    "bloodGroups": {
+      "A+": "A+",
+      "A-": "A-",
+      "B+": "B+",
+      "B-": "B-",
+      "O+": "O+",
+      "O-": "O-",
+      "AB+": "AB+",
+      "AB-": "AB-"
+    },
+    "noDonorsMessage": "No Donors Added"
+  }
+,
+  "loginPage": {
+    "title": "Login with us to avail all the features.",
+    "emailLoginTitle": "Login with Email",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter a strong password",
+    "forgetPassword": "Forget Password",
+    "noAccount": "Don't have an account?",
+    "registerNow": "Please Register",
+    "loginButton": "Login",
+    "socialLoginTitle": "Login with Social Platforms",
+    "googleLogin": "Google",
+    "googleTitle": "Register with Google",
+    "linkedInLogin": "LinkedIn",
+    "linkedInTitle": "Register with LinkedIn",
+    "facebookLogin": "Facebook",
+    "facebookTitle": "Register with Facebook"
+  },
+   "register": {
+    "title": "Register with us to avail all the features.",
+    "emailRegistration": {
+      "heading": "Register with Email",
+      "nameLabel": "Name",
+      "namePlaceholder": "Enter your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter a strong password",
+      "imageInstruction": "Choose an image for profile",
+      "alreadyHaveAccount": "Already have an account?",
+      "loginLink": "Please Login"
+    },
+    "socialRegistration": {
+      "heading": "Register with Social Platforms",
+      "google": "Google",
+      "linkedin": "LinkedIn",
+      "facebook": "Facebook"
+    }
+  }
+  }
+

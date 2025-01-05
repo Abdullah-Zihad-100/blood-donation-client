@@ -2,80 +2,106 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { RiFacebookCircleFill } from "react-icons/ri";
 import { TiWorld } from "react-icons/ti";
 import Container from "./Container";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="bg-gradient-to-r from-rose-300 to-rose-500 p-3">
         <Container>
           <div className="flex justify-between md:gap-6 gap-2">
             <div className="flex-1 space-y-2">
-              <h2 className="text-white text-2xl md:text-3xl font-semibold">
-                Compact Blood Donation
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                {t("footer.title")}
               </h2>
               <p className="text-white md:text-[16px] text-sm">
-                This websie is an automated blood service that connects blood
-                searchers with voluntary blood donors in a moment through SMS
-                and website.
+                {t("footer.description")}
               </p>
               <div className="flex gap-4 py-3 text-neutral-600 text-xl">
                 <a
                   target="_blank"
                   href="https://www.facebook.com/CompactPolytechnic"
+                  rel="noreferrer"
                 >
-                  {" "}
                   <RiFacebookCircleFill />
                 </a>
                 <IoLogoWhatsapp />
-                <a href="https://cpifeni.edu.bd/" target="_blank">
+                <a
+                  href="https://cpifeni.edu.bd/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <TiWorld />
                 </a>
               </div>
-              <p className="cursor-pointer text-black ">
-                Terms & Conditions | Privacy Policy
+              <p className="cursor-pointer text-gray-700">
+                {t("footer.terms")}
               </p>
             </div>
             <div className="flex-1 space-y-2">
-              <h2 className="text-white text-2xl md:text-3xl font-semibold">
-                Ours Links
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                {t("footer.linksTitle")}
               </h2>
               <ul className="text-white text-lg md:space-y-2">
                 <li>
-                  <a href="/">Home</a>
+                  <a className="text-sm md:text-[15px]" href="/">
+                    {t("footer.links.home")}
+                  </a>
                 </li>
                 <li>
-                  <a href="/about">About Us</a>
+                  <a className="text-sm md:text-[15px]" href="/about">
+                    {t("footer.links.about")}
+                  </a>
                 </li>
                 <li>
-                  <a href="/donators">Donators</a>
+                  <a className="text-sm md:text-[15px]" href="/donators">
+                    {t("footer.links.donators")}
+                  </a>
                 </li>
                 <li>
-                  <a href="/contact">Contact Us</a>
+                  <a className="text-sm md:text-[15px]" href="/contact">
+                    {t("footer.links.contact")}
+                  </a>
                 </li>
                 <li>
-                  <a href="/reviews">Reviews</a>
+                  <a className="text-sm md:text-[15px]" href="/reviews">
+                    {t("footer.links.reviews")}
+                  </a>
                 </li>
               </ul>
             </div>
             <div className="flex-1 space-y-2">
-              <h2 className="text-white text-2xl md:text-3xl font-semibold">
-                <a href="/about">About Blood</a>
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                <a href="/about">{t("footer.aboutBloodTitle")}</a>
               </h2>
               <ul className="text-white text-lg sm:space-y-2">
-                <li>What is blood</li>
-                <li>What is blood donation</li>
-                <li>Who can donate blood</li>
-                <li>Different blood group</li>
+                <li className="text-sm md:text-[15px]">
+                  {t("footer.aboutBlood.whatIsBlood")}
+                </li>
+                <li className="text-sm md:text-[15px]">
+                  {t("footer.aboutBlood.whatIsDonation")}
+                </li>
+                <li className="text-sm md:text-[15px]">
+                  {t("footer.aboutBlood.whoCanDonate")}
+                </li>
+                <li className="text-sm md:text-[15px]">
+                  {t("footer.aboutBlood.bloodGroups")}
+                </li>
               </ul>
             </div>
           </div>
         </Container>
       </div>
       <p className="text-white bg-neutral-800 p-2 md:p-3 text-center uppercase sm:text-md text-sm">
-        Copyright © Cpi 2024 - Present | Made with
-        <span className="text-red-600"> ❤ </span> by Cpi 6Th (Abdullah-Zihad)
+        {t("footer.copyright", {
+          year: new Date().getFullYear(),
+          creator: "CPI 6Th (Abdullah-Zihad)",
+        })}
       </p>
     </>
   );
 };
+
 export default Footer;

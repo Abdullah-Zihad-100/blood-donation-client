@@ -1,63 +1,72 @@
 import Container from "./Container";
 import Button from "./Button";
-import {Link} from "react-router";
+import { Link } from "react-router";
 import Header from "./Header";
+import { useTranslation } from "react-i18next"; // Import i18next hook
 
 const DonateSection = () => {
+  const { t } = useTranslation(); // Use i18next hook for translation
+
   return (
     <Container>
-            <Header title={"  Support For Our Website"} />{" "}
+      <Header title={t("donateSection.header")} /> {/* Use translation key */}
       <div className="p-5 py-16">
         <div className="flex flex-col md:flex-row gap-7 items-center">
           {/* Section 1 */}
           <div className="flex-1">
             <h3 className="text-3xl text-neutral-900 leading-8 mb-3">
-              3. Why Donate to Us?
+              {t("donateSection.section1Title")} {/* Use translation key */}
             </h3>
             <p className="text-[18px] text-neutral-700 leading-10">
-              Your donations help us improve our platform, expand our reach, and
-              save more lives. With your support, we can provide better
-              services, create new features, and ensure the availability of
-              essential resources for blood donation campaigns.
+              {t("donateSection.section1Description")}{" "}
+              {/* Use translation key */}
             </p>
           </div>
 
           {/* Section 2 */}
           <div className="flex-1">
             <h3 className="text-3xl text-neutral-900 leading-10 mb-3">
-              How Your Contribution Makes a Difference
+              {t("donateSection.section2Title")} {/* Use translation key */}
             </h3>
             <div className="space-y-7 text-neutral-700">
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Better Technology:
+                  {t("donateSection.techTitle")} {/* Use translation key */}
                 </span>{" "}
-                Help us build a faster, more reliable platform.
+                {t("donateSection.techDescription")} {/* Use translation key */}
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Increased Awareness:
+                  {t("donateSection.awarenessTitle")}{" "}
+                  {/* Use translation key */}
                 </span>{" "}
-                Support campaigns to educate people about blood donation.
+                {t("donateSection.awarenessDescription")}{" "}
+                {/* Use translation key */}
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Broader Reach:
+                  {t("donateSection.reachTitle")} {/* Use translation key */}
                 </span>{" "}
-                Enable us to connect with more donors and recipients globally.
+                {t("donateSection.reachDescription")}{" "}
+                {/* Use translation key */}
               </p>
               <p className="text-[16px]">
                 <span className="text-lg text-neutral-700 font-semibold ">
-                  Community Growth:
+                  {t("donateSection.communityTitle")}{" "}
+                  {/* Use translation key */}
                 </span>{" "}
-                Join hands in growing a life-saving community.
+                {t("donateSection.communityDescription")}{" "}
+                {/* Use translation key */}
               </p>
             </div>
           </div>
         </div>
-        <Link to={"/payment"} className="flex justify-center items-center mt-10">
+        <Link
+          to={"/payment"}
+          className="flex justify-center items-center mt-10"
+        >
           <Button className="bg-blue-500 rounded shadow-lg px-4 py-3 text-white font-semibold">
-            Donate
+            {t("donateSection.donateButton")} {/* Use translation key */}
           </Button>
         </Link>
       </div>

@@ -5,12 +5,13 @@ import "./UserReviews.css";
 import Header from "./Header";
 import ReactStars from "react-rating-star-with-type";
 import Container from "./Container";
+import { useTranslation } from "react-i18next";
 
 const UserReviews = () => {
   const [data, isLoading] = useReviews();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
-
+  const { t } = useTranslation();
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
     slideChanged(slider) {
@@ -27,11 +28,11 @@ const UserReviews = () => {
 
   return (
     <Container>
-      <Header title="User Reviews" />
+      <Header title={t('userReview.header')} />
       {data?.length > 0 ? (
         <div className="navigation-wrapper my-10 lg:w-3/4 mx-auto">
           <div ref={sliderRef} className="keen-slider">
-            {data?.slice(0,10)?.map((review, index) => (
+            {data?.slice(0, 10)?.map((review, index) => (
               <div
                 key={index}
                 className="keen-slider__slide w-full mx-auto text-center"

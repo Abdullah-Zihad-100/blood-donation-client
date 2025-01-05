@@ -6,8 +6,14 @@ import useAuth from "../Hooks/useAuth";
 import { clearCookies } from "../apis/auth";
 import useRole from "../Hooks/useRole";
 import defaultPhoto from "../assets/defaultPhoto.jpg";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navber = () => {
+
+  const { t } = useTranslation();
+
+
   const [role] = useRole();
   console.log("role---->",role?.role);
   const { user, logout } = useAuth();
@@ -40,7 +46,7 @@ const Navber = () => {
                 : "text-white"
             }
           >
-            Home
+            {t("header.home")}
           </NavLink>
           <NavLink
             to="/about"
@@ -50,7 +56,7 @@ const Navber = () => {
                 : "text-white"
             }
           >
-            About Us
+            {t("header.aboutUs")}
           </NavLink>
           <NavLink
             to="/contact"
@@ -60,7 +66,7 @@ const Navber = () => {
                 : "text-white"
             }
           >
-            Contact Us
+            {t("header.contactUs")}
           </NavLink>
           <NavLink
             to="/donators"
@@ -70,7 +76,7 @@ const Navber = () => {
                 : "text-white"
             }
           >
-            Donators
+            {t("header.donators")}
           </NavLink>
           {user && (
             <NavLink
@@ -78,10 +84,10 @@ const Navber = () => {
               className={({ isActive }) =>
                 isActive
                   ? "font-semibold text-lg text-white underline"
-                : "text-white"
+                  : "text-white"
               }
             >
-              Reviews
+              {t("header.reviews")}
             </NavLink>
           )}
           {role?.role === "admin" && (
@@ -93,7 +99,7 @@ const Navber = () => {
                   : "text-white"
               }
             >
-              Dashboard
+              {t("userProfile.dashboard")}
             </NavLink>
           )}
           {user ? (
@@ -103,7 +109,7 @@ const Navber = () => {
                 onClick={handleLogout}
                 className="bg-rose-400 rounded shadow-lg px-4 py-3 text-white font-semibold"
               >
-                Logout
+                {t("userProfile.logout")}
               </button>
             )
           ) : (
@@ -115,7 +121,7 @@ const Navber = () => {
                   : "text-white"
               }
             >
-              Login
+              {t("header.login")}
             </NavLink>
           )}
         </div>
@@ -137,7 +143,7 @@ const Navber = () => {
               className="menu menu-sm dropdown-content text-lg font-semibold rounded z-[1] mt-3 w-52 p-2 shadow bg-white text-red-400"
             >
               <li className="text-sm ms-3 text-black font-normal">
-                User Name: {user?.displayName}
+                {t("userProfile.userName")}: {user?.displayName}
               </li>
               <li>
                 {role?.role === "donator" ? (
@@ -150,13 +156,13 @@ const Navber = () => {
                           : "text-rose-400"
                       }
                     >
-                      My Profile
+                      {t("userProfile.myProfile")}
                     </NavLink>
                     <button
                       onClick={handleLogout}
                       className="bg-rose-400 rounded shadow-lg text-white font-semibold"
                     >
-                      Logout
+                      {t("userProfile.logout")}
                     </button>
                   </>
                 ) : (
@@ -164,13 +170,20 @@ const Navber = () => {
                     onClick={handleLogout}
                     className="bg-rose-400 rounded shadow-lg px-4 py-3 text-white font-semibold"
                   >
-                    Logout
+                    {t("userProfile.logout")}
                   </button>
                 )}
               </li>
             </ul>
           </div>
         )}
+
+        {/* <button className="text-white text-lg mx-2">
+          <TbWorld />
+
+        </button> */}
+
+        <LanguageSwitcher></LanguageSwitcher>
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden text-white text-2xl cursor-pointer">
@@ -191,7 +204,7 @@ const Navber = () => {
               isActive ? "font-semibold text-lg text-rose-500 underline" : ""
             }
           >
-            Home
+            {t("header.home")}
           </NavLink>
           {user && (
             <NavLink
@@ -200,7 +213,7 @@ const Navber = () => {
                 isActive ? "font-semibold text-lg text-rose-500 underline" : ""
               }
             >
-              Reviews
+              {t("header.reviews")}
             </NavLink>
           )}
           {role?.role === "admin" && (
@@ -210,7 +223,7 @@ const Navber = () => {
                 isActive ? "font-semibold text-lg text-rose-500 underline" : ""
               }
             >
-              Dashboard
+              {t("userProfile.dashboard")}
             </NavLink>
           )}
           <NavLink
@@ -219,7 +232,7 @@ const Navber = () => {
               isActive ? "font-semibold text-lg" : ""
             }
           >
-            About Us
+            {t("header.aboutUs")}
           </NavLink>
           <NavLink
             to="/donators"
@@ -227,7 +240,7 @@ const Navber = () => {
               isActive ? "font-semibold text-lg" : ""
             }
           >
-            Donators
+            {t("header.donators")}
           </NavLink>
           <NavLink
             to="/contact"
@@ -235,7 +248,7 @@ const Navber = () => {
               isActive ? "font-semibold text-lg" : ""
             }
           >
-            Contact Us
+            {t("header.contactUs")}
           </NavLink>
 
           {user ? (
@@ -257,7 +270,7 @@ const Navber = () => {
                   : "text-rose-500"
               }
             >
-              Login
+              {t("header.login")}
             </NavLink>
           )}
         </div>

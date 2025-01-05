@@ -1,12 +1,17 @@
-import Button from "../Components/Button";
-import Header from "../Components/Header";
+import { useTranslation } from "react-i18next";
 import { IoMdMail } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaSms } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+
+import Button from "../Components/Button";
+import Header from "../Components/Header";
 import Container from "../Components/Container";
 import { contactDetails } from "../apis/auth";
-import { toast } from "react-hot-toast";
+
 const Contact = () => {
+  const { t } = useTranslation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,75 +20,81 @@ const Contact = () => {
       const contactNumber = e.target.contactNumber.value;
       const email = e.target.email.value;
       const user = { name, contactNumber, email };
-      console.log(user);
 
-      // Directly get the data from contactDetails
       const response = await contactDetails(user);
-      console.log(response); // Log the actual response
+      console.log(response);
 
-      toast.success("Send Email Successful");
+      toast.success(t("contact.toastMessage"));
       e.target.reset();
     } catch (err) {
-      console.error(err); // Use console.error for better debugging
+      console.error(err);
     }
   };
 
   return (
     <Container>
-      <div className="">
-        <Header title={"Contact With Us"} />
+      <div>
+        <Header title={t("contact.title")} />
 
         <div className="md:flex items-center gap-5 mt-10 m-20">
-          {/* first div */}
+          {/* Location, SMS, Email Section */}
           <div className="flex-1">
             <div className="py-3">
               <FaLocationDot className="mx-auto text-rose-500 text-4xl my-3" />
               <h4 className="text-gray-700 text-xl text-center">
-                Feni sodor, academy road, Compact polytechnic institute
+                {t("contact.location")}
               </h4>
             </div>
             <div className="py-3">
               <FaSms className="mx-auto text-rose-500 text-4xl my-3" />
               <h4 className="text-gray-700 text-xl text-center">
-                01XXXXXXXX (Only SMS)
+                {t("contact.sms")}
               </h4>
             </div>
             <div className="py-3">
               <IoMdMail className="mx-auto text-rose-500 text-4xl my-3" />
               <h4 className="text-gray-700 text-xl text-center">
-                cpiblooddonation@gmail.com
+                {t("contact.email")}
               </h4>
             </div>
           </div>
 
-          {/* secend div */}
+          {/* Contact Form Section */}
           <div className="flex-1">
-            <h2 className="text-3xl font-serif my-4">Contact Us Online</h2>
-            <form className="" onSubmit={handleSubmit}>
-              <label className="w-full my">
-                <p className="text-lg font-semibold">Name</p>
+            <h2 className="text-3xl font-serif my-4">
+              {t("contact.onlineContactTitle")}
+            </h2>
+            <form onSubmit={handleSubmit}>
+              <label>
+                <p className="text-lg font-semibold">
+                  {t("contact.form.name")}
+                </p>
                 <input
-                  placeholder="Enter your name"
+                  placeholder={t("contact.form.namePlaceholder")}
                   type="text"
                   required
                   name="name"
                   className="w-full h-10 px-2 border-neutral-600 rounded-md border"
                 />
               </label>
-              <label className="w-full">
-                <p className="text-lg font-semibold">Email</p>
+              <label>
+                <p className="text-lg font-semibold">
+                  {t("contact.form.email")}
+                </p>
                 <input
-                  placeholder="Enter your email"
+                  placeholder={t("contact.form.emailPlaceholder")}
                   type="email"
                   required
                   name="email"
                   className="w-full h-10 px-2 border-neutral-600 rounded-md border"
                 />
               </label>
-              <label className="w-full">
-                <p className="text-lg font-semibold">Contact Number</p>
+              <label>
+                <p className="text-lg font-semibold">
+                  {t("contact.form.contactNumber")}
+                </p>
                 <input
-                  placeholder="Enter your contact number"
+                  placeholder={t("contact.form.contactNumberPlaceholder")}
                   type="number"
                   required
                   name="contactNumber"
@@ -91,7 +102,7 @@ const Contact = () => {
                 />
               </label>
               <div className="my-3">
-                <Button>Send Message</Button>
+                <Button>{t("contact.form.sendMessage")}</Button>
               </div>
             </form>
           </div>
@@ -100,4 +111,5 @@ const Contact = () => {
     </Container>
   );
 };
+
 export default Contact;
